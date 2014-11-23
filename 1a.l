@@ -17,6 +17,11 @@ int main(int argc,char *argv[])
    exit(0);  
   }
  }
+ else
+ {
+  printf("argument count not correct\n");
+  return 0;
+ }
  yylex();
  printf("\n \n the no of:\n");
  printf("characters=%d\n words=%d\n lines=%d\n spaces=%d\n",ch,word,ln,spc);
