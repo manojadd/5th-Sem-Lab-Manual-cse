@@ -1,15 +1,18 @@
 %{#include<stdio.h>
-  int top=-1,opn=0,opr=0,i,j;
+  int top=-1,opn=0,opr=0,all=0,i,j,ex[20];
   char s[20],a[20],b[20];
 %}
 %%
-"(" {top++;}
-")" {if(top==-1)
-    {printf("invalid \n");exit(0);}
-    else top--;
+"(" {top++;ex[all++]=yytext[0];}
+")" {
+     if(top==-1||ex[all-1]=='(')
+      {
+       printf("invalid \n");exit(0);
+      }
+     else{ top--; ex[all++]=yytext[0];}
     }
-[a-zA-Z0-9]	   {a[opn++]=yytext[0];}
-[\+\-\*\/]         {b[opr++]=yytext[0];}
+[a-zA-Z0-9]	   {a[opn++]=yytext[0];ex[all++]=yytext[0];}
+[\+\-\*\/]         {b[opr++]=yytext[0];ex[all++]=yytext[0];}
 \n {return 0;}
 %%
 int main()
@@ -26,6 +29,6 @@ int main()
   for(j=0;j<opr;j++)
    printf("%c\n",b[j]);
  }
-else
- printf("invalid\n"); 
+ else
+  printf("invalid\n"); 
 }
