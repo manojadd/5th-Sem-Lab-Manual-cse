@@ -1,0 +1,74 @@
+#include<stdio.h>
+#include<stdlib.h>
+main()
+{
+ int alloc[20][20],need[20][20],max[20][20],avail[20],completed[20],total[20]={0},maxi[20]={0},safe[20];
+ int i,j,k=0,complete=0,r,p;
+ printf("Bankers algorithm\n");
+ printf("Enter the number of processes:\n");
+ scanf("%d",&p);
+ printf("Enter the number of resources:\n");
+ scanf("%d",&r);
+ for(i=0;i<r;i++)
+ {
+  printf("Enter the total instances for resource %d",i+1);
+  scanf("%d",&maxi[i]);
+ }
+ printf("Enter the max instances of each resource needed for each process:\n");
+ for(i=0;i<p;i++)
+ { 
+  printf("For process P[%d]",i+1);
+  for(j=0;j<r;j++)
+   scanf("%d",&max[i][j]);
+ }
+ printf("Enter the number of instances already given to each process:\n");
+ for(i=0;i<p;i++)
+ { 
+  printf("For process P[%d]",i+1);
+  for(j=0;j<r;j++)
+   scanf("%d",&alloc[i][j]);
+ }
+ printf("Initializing need matrix:\n");
+ for(i=0;i<p;i++)
+   need[i][j]=max[i][j]-alloc[i][j];
+ printf("Initializing available instances:\n");
+ for(i=0;i<r;i++)
+ {
+  for(j=0;j<p;j++)
+  {
+   total[i]+=alloc[j][i];
+  }
+  avail[i]=maxi[i]-total[i];
+ }
+ while(complete!=p)
+ {
+  for(i=0;i<p;i++)
+  {
+   if(completed[i]==0)
+   {
+    j=0;
+    while(j!=r)
+    {
+     if(need[i][j]>avail[j])
+      break;
+     j++;
+    }
+    if(j==r)
+    {
+     safe[k++]=i;
+     for(j=0;j<r;j++)
+      avail[j]+=alloc[i][j];
+     complete++;
+    }
+    else if(j!=r&&complete!=p)
+    {
+     printf("Unsafe state!! \n");
+     exit(0);
+    }
+   }
+  }
+ }
+ printf("The system is safe.\n Safe Sequence is:\n");
+ for(i=0;i<p;i++)
+  printf("%d",safe[i]);
+}
