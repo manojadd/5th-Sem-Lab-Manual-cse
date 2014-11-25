@@ -47,14 +47,14 @@ int main()
   for(k=0;k<n;k++)
    for(j=0;j<nor;j++)
    {
-   //printf("\n\n\t enter the max of resource %d:",j);
+   printf("\n\n\t enter the max of resource %d:",j);
    scanf("%d",&p[k].max[j]);
    }
   printf("\n\n\tallocated resources matrix for p %d:",i);
   for(k=0;k<n;k++)
    for(j=0;j<nor;j++)
    {
-    //printf("\n\n\t allocation of resource %d:",j);
+    printf("\n\n\t allocation of resource %d:",j);
     scanf("%d",&p[k].all[j]);
     if(p[k].all[j]>p[k].max[j])
     {
@@ -122,10 +122,10 @@ int main()
    printf("\n\n\t p%d:",i);
    for(j=0;j<nor;j++)
     printf("%d",p[i].max[j]);
-   printf("\t");
+   printf("\t\t");
    for(j=0;j<nor;j++)
     printf("%d",p[i].all[j]);
-   printf("\t");
+   printf("\t\t");
    for(j=0;j<nor;j++)
     printf("%d",p[i].need[j]);
   }
